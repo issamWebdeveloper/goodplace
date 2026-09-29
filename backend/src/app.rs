@@ -11,7 +11,7 @@ use serde_json::json;
 use sqlx::PgPool;
 use tower_http::{
     compression::CompressionLayer,
-    cors::CorsLayer,
+    cors::{AllowOrigin, CorsLayer},
     set_header::SetResponseHeaderLayer,
     trace::TraceLayer,
 };
@@ -27,16 +27,21 @@ pub struct AppState {
 }
 
 pub fn router(state: AppState) -> Router {
+    // Lecture publique : seules routes ouvertes à d'autres sites (ex. gharsallah.fr).
+    let public = Router::new()
+        .nest("/profile", modules::profile::router())
+        .nest("/articles", modules::articles::routes::public_router())
+        .layer(public_cors(&state.config.cors_origins));
+
     let api = Router::new()
         .route("/health", get(|| async { Json(json!({ "status": "ok" })) }))
         .nest("/auth", modules::auth::routes::router())
         .nest("/account", modules::users::routes::account_router())
-        .nest("/profile", modules::profile::router())
-        .nest("/articles", modules::articles::routes::public_router())
         .nest("/admin/articles", modules::articles::routes::admin_router())
-        .nest("/admin/users", modules::users::routes::admin_router());
+        .nest("/admin/users", modules::users::routes::admin_router())
+        .merge(public);
 
-    let mut app = Router::new()
+    Router::new()
         .nest("/api", api)
         .merge(modules::seo::router())
         .layer(SetResponseHeaderLayer::if_not_present(
@@ -44,24 +49,15 @@ pub fn router(state: AppState) -> Router {
             HeaderValue::from_static("nosniff"),
         ))
         .layer(CompressionLayer::new())
-        .layer(TraceLayer::new_for_http());
+        .layer(TraceLayer::new_for_http())
+        .with_state(state)
+}
 
-    // En production, le front et l'API partagent la même origine (proxy) : CORS inutile.
-    if !state.config.cors_origins.is_empty() {
-        let origins: Vec<HeaderValue> = state
-            .config
-            .cors_origins
-            .iter()
-            .filter_map(|o| o.parse().ok())
-            .collect();
-        app = app.layer(
-            CorsLayer::new()
-                .allow_origin(origins)
-                .allow_credentials(true)
-                .allow_methods([Method::GET, Method::POST, Method::PUT, Method::PATCH, Method::DELETE])
-                .allow_headers([header::CONTENT_TYPE]),
-        );
-    }
-
-    app.with_state(state)
+/// CORS limité aux lectures publiques : GET uniquement, sans cookie.
+/// Le front et l'API partagent la même origine (proxy) : les routes authentifiées n'en ont pas besoin.
+fn public_cors(origins: &[String]) -> CorsLayer {
+    let origins: Vec<HeaderValue> = origins.iter().filter_map(|o| o.parse().ok()).collect();
+    CorsLayer::new()
+        .allow_origin(AllowOrigin::list(origins))
+        .allow_methods([Method::GET])
 }

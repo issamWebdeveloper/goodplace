@@ -39,6 +39,8 @@ import { NewsletterForm } from '../shared/newsletter-form';
       <div class="container bottom">
         <span>© {{ year }} GoodPlace — Issam Gharsallah</span>
         <span>
+          <a href="https://gharsallah.fr" rel="me noopener" target="_blank" hreflang="en">Portfolio</a>
+          ·
           <a href="https://github.com/issamWebdeveloper" rel="noopener" target="_blank">GitHub</a>
           ·
           <a href="https://www.linkedin.com/in/issam-gharsallah/" rel="noopener" target="_blank">LinkedIn</a>

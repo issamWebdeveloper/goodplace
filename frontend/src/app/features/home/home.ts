@@ -45,6 +45,9 @@ export class Home {
   protected readonly linkedin = computed(() =>
     this.basics().profiles.find((p) => p.network === 'LinkedIn'),
   );
+  protected readonly portfolio = computed(() =>
+    this.basics().profiles.find((p) => p.network === 'Portfolio'),
+  );
   protected readonly github = computed(() =>
     this.basics().profiles.find((p) => p.network === 'GitHub'),
   );

@@ -4,7 +4,9 @@ Site vitrine et blog d'**Issam Gharsallah** — développement web (Angular, ful
 
 - **API** : Rust + [Axum](https://github.com/tokio-rs/axum), PostgreSQL (sqlx), cache mémoire [moka](https://github.com/moka-rs/moka), tâches cron (`tokio-cron-scheduler`), emails SMTP (`lettre`)
 - **Front** : Angular 22 (standalone, signals, zoneless) avec **rendu serveur (SSR)** et hydratation
-- **Design** : inspiré du thème Sonic (YOOtheme), bleu `#32beff` / dégradé `#19b1f0 → #0171cd`, Lato + Open Sans, logo « GP »
+- **Design** : inspiré du thème Sonic (YOOtheme), bleu `#32beff` / dégradé `#19b1f0 → #0171cd`, Lato + Open Sans
+  auto-hébergées (`@fontsource`, aucune requête vers Google Fonts), logo « GP »
+- **Portfolio associé** : [gharsallah.fr](https://gharsallah.fr) (anglais) ; GoodPlace est le blog technique en français
 
 ## Fonctionnalités
 
@@ -40,6 +42,8 @@ Les articles sont écrits en Markdown, rendus en HTML et assainis côté serveur
 - Vrais codes 404 côté serveur, `sitemap.xml`, `rss.xml`, `robots.txt`.
 - Données transférées du rendu serveur au navigateur (pas de double appel API).
 - Cache applicatif (listes, articles, sitemap/RSS, sessions) invalidé à chaque publication, en-têtes `Cache-Control`.
+- CORS limité à la lecture publique (`/api/articles`, `/api/profile`, GET, sans cookie) pour les origines de
+  `CORS_ORIGINS` — utilisé par gharsallah.fr pour afficher les derniers articles.
 
 ## Architecture
 
