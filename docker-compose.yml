@@ -1,0 +1,59 @@
+# Déploiement complet : PostgreSQL + API Rust + front Angular SSR + Caddy (HTTPS automatique).
+# Développement local avec capture des emails : docker compose --profile dev up
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: goodplace
+      POSTGRES_USER: goodplace
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?définir POSTGRES_PASSWORD dans .env}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U goodplace -d goodplace"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://goodplace:${POSTGRES_PASSWORD}@db:5432/goodplace
+      BIND_ADDR: 0.0.0.0:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:8080
+      PORT: 4000
+    depends_on:
+      - api
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+    depends_on:
+      - web
+
+  # Serveur SMTP de test : interface web sur http://localhost:8025
+  mailpit:
+    image: axllent/mailpit
+    profiles: ["dev"]
+    ports:
+      - "8025:8025"
+
+volumes:
+  db-data:
+  caddy-data:

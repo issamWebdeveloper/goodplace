@@ -1,0 +1,61 @@
+@if (article(); as a) {
+  <article>
+    <header class="section-primary article-hero">
+      <div class="container container-narrow">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a routerLink="/">Accueil</a> / <a routerLink="/blog">Blog</a>
+        </nav>
+        <h1>{{ a.title }}</h1>
+        <p class="meta">
+          @if (a.published_at) {
+            <time [attr.datetime]="a.published_at">{{ a.published_at | date: 'd MMMM y' }}</time>
+            <span aria-hidden="true">•</span>
+          }
+          <span>{{ a.reading_minutes }} min de lecture</span>
+        </p>
+        <div class="tags">
+          @for (tag of a.tags; track tag) {
+            <a [routerLink]="['/blog']" [queryParams]="{ tag }">{{ tag }}</a>
+          }
+        </div>
+      </div>
+    </header>
+
+    @if (a.cover_image) {
+      <div class="container container-narrow cover">
+        <img [src]="a.cover_image" alt="" width="1200" height="630" fetchpriority="high" />
+      </div>
+    }
+
+    <div class="container container-narrow">
+      <p class="excerpt">{{ a.excerpt }}</p>
+      <!-- HTML généré et assaini côté serveur (ammonia) à partir du Markdown. -->
+      <div class="prose" [innerHTML]="a.content_html"></div>
+
+      <aside class="author card">
+        <img src="/images/issam-gharsallah.jpg" alt="" width="72" height="72" loading="lazy" />
+        <div>
+          <strong>Issam Gharsallah</strong>
+          <p>Développeur front-end Angular et full-stack, passionné par la performance, l'accessibilité et l'IA appliquée au développement.</p>
+        </div>
+      </aside>
+
+      <aside class="subscribe">
+        <h2>Vous avez aimé cet article ?</h2>
+        <p>Recevez les prochains par email.</p>
+        <app-newsletter-form />
+      </aside>
+
+      <p class="back"><a class="btn btn-default" routerLink="/blog">← Tous les articles</a></p>
+    </div>
+  </article>
+} @else {
+  <section class="section not-found">
+    <div class="container container-narrow">
+      <span class="text-meta">Erreur 404</span>
+      <h1 class="heading-section">Article introuvable</h1>
+      <p class="lead">Cet article n'existe pas ou n'est pas encore publié.</p>
+      <a class="btn btn-primary" routerLink="/blog">Voir tous les articles</a>
+    </div>
+  </section>
+}

@@ -1,0 +1,15 @@
+# Rust
+backend/target/
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Environnement
+.env
+backend/.env
+
+# Divers
+.DS_Store
+*.log

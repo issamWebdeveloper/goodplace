@@ -1,0 +1,117 @@
+<div class="head">
+  <div>
+    <a routerLink="/admin/articles" class="back">← Articles</a>
+    <h1>{{ article() ? 'Modifier l’article' : 'Nouvel article' }}</h1>
+  </div>
+  @if (article(); as a) {
+    <span class="badge badge-{{ a.status }}">{{ labels[a.status] }}</span>
+  }
+</div>
+
+@if (notice(); as n) {
+  <p class="alert alert-success" role="status">{{ n }}</p>
+}
+@if (error(); as err) {
+  <p class="alert alert-error" role="alert">{{ err }}</p>
+}
+
+<div class="layout">
+  <form class="card main" (ngSubmit)="save()">
+    <div class="card-body form-stack">
+      <div class="field">
+        <label for="title">Titre</label>
+        <input id="title" class="input" name="title" [(ngModel)]="form.title" maxlength="200" required />
+      </div>
+      <div class="field">
+        <label for="excerpt">Résumé</label>
+        <textarea id="excerpt" class="textarea short" name="excerpt" [(ngModel)]="form.excerpt" maxlength="500"></textarea>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" [attr.aria-selected]="tab() === 'write'" (click)="tab.set('write')">Markdown</button>
+        <button type="button" role="tab" [attr.aria-selected]="tab() === 'preview'" (click)="showPreview()">Aperçu</button>
+      </div>
+      @if (tab() === 'write') {
+        <textarea class="textarea content" name="content" [(ngModel)]="form.content_md" aria-label="Contenu en Markdown"></textarea>
+      } @else {
+        <p class="muted">{{ previewMinutes() }} min de lecture</p>
+        <div class="preview" [innerHTML]="previewHtml()"></div>
+      }
+      <button class="btn btn-default" [disabled]="pending()">Enregistrer</button>
+    </div>
+  </form>
+
+  <aside class="side">
+    <div class="card">
+      <div class="card-body form-stack">
+        <h2>Publication</h2>
+        @if (article(); as a) {
+          @if (a.status === 'published') {
+            <p class="muted">En ligne depuis le {{ a.published_at | date: 'd MMMM y à HH:mm' }}.</p>
+            <a class="btn btn-default" [routerLink]="['/blog', a.slug]" target="_blank">Voir en ligne</a>
+            <button type="button" class="btn btn-default" (click)="unpublish()" [disabled]="pending()">Dépublier</button>
+          } @else {
+            @if (a.status === 'validated' && a.scheduled_at) {
+              <p class="alert alert-info">Publication automatique prévue le {{ a.scheduled_at | date: 'd MMMM y à HH:mm' }}.</p>
+            }
+            <div class="field">
+              <label for="scheduled">Date de publication automatique</label>
+              <input id="scheduled" class="input" type="datetime-local" name="scheduled" [(ngModel)]="scheduledAt" />
+              <span class="field-hint">Laisser vide pour valider sans programmer.</span>
+            </div>
+            <button type="button" class="btn btn-default" (click)="validate()" [disabled]="pending()">
+              {{ scheduledAt ? 'Valider et programmer' : 'Valider' }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="publish()" [disabled]="pending()">Publier maintenant</button>
+            @if (a.status === 'validated') {
+              <button type="button" class="btn btn-default" (click)="unpublish()" [disabled]="pending()">Repasser en brouillon</button>
+            }
+          }
+        } @else {
+          <p class="muted">Enregistrez d’abord le brouillon.</p>
+        }
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body form-stack">
+        <h2>Métadonnées</h2>
+        <div class="field">
+          <label for="slug">Slug (URL)</label>
+          <input id="slug" class="input" name="slug" [(ngModel)]="form.slug" placeholder="généré depuis le titre" />
+        </div>
+        <div class="field">
+          <label for="tags">Tags</label>
+          <input id="tags" class="input" name="tags" [(ngModel)]="tagsText" placeholder="Angular, Performance" />
+          <span class="field-hint">Séparés par des virgules.</span>
+        </div>
+        <div class="field">
+          <label for="cover">Image de couverture</label>
+          <input id="cover" class="input" name="cover" [(ngModel)]="form.cover_image" placeholder="/images/blog/…" />
+        </div>
+        <div class="field">
+          <label for="seo-title">Titre SEO</label>
+          <input id="seo-title" class="input" name="seo_title" [(ngModel)]="form.seo_title" />
+        </div>
+        <div class="field">
+          <label for="seo-desc">Description SEO</label>
+          <textarea id="seo-desc" class="textarea short" name="seo_description" [(ngModel)]="form.seo_description" maxlength="300"></textarea>
+        </div>
+      </div>
+    </div>
+
+    @if (article()) {
+      <div class="card">
+        <div class="card-body">
+          @if (confirmDelete()) {
+            <p>Supprimer définitivement cet article ?</p>
+            <button type="button" class="btn btn-danger" (click)="remove()">Supprimer</button>
+            <button type="button" class="btn btn-default" (click)="confirmDelete.set(false)">Annuler</button>
+          } @else {
+            <button type="button" class="btn btn-default" (click)="confirmDelete.set(true)">Supprimer l’article</button>
+          }
+        </div>
+      </div>
+    }
+  </aside>
+</div>

@@ -1,0 +1,42 @@
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--gp-border);
+  button {
+    padding: 12px 8px;
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: var(--gp-font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gp-muted);
+    cursor: pointer;
+    &[aria-selected='true'] {
+      color: var(--gp-primary-strong);
+      border-color: var(--gp-primary);
+    }
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.88rem;
+}
+
+.btn {
+  width: 100%;
+}
+
+.intro {
+  color: var(--gp-muted);
+  font-size: 0.95rem;
+}

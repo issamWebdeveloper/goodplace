@@ -1,0 +1,367 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Issam GHARSALLAH",
+    "label": "Développeur Front-End Angular & Full-Stack • IA appliquée au développement",
+    "image": "/images/issam-gharsallah.jpg",
+    "email": "issam.webdeveloper@gmail.com",
+    "url": "https://gharsallah.link",
+    "summary": "Fort de 17 années d’expérience en développement web, dont plusieurs dans l’e-santé et la manipulation de données sensibles, j’ai démontré ma capacité à concevoir et à déployer des solutions fiables et sûres (RGPD, FHIR, standards HDS). J’adhère aux méthodologies TDD et DevOps (GitLab CI/CD, Docker) et maîtrise JavaScript/TypeScript, Angular (jusqu’à la v18) ainsi que les principes de sécurité (OAuth, chiffrement, authentification forte). Je reste en veille sur les technologies émergentes et je suis motivé par la mise en place de projets critiques requérant un haut niveau de conformité.",
+    "location": {
+      "countryCode": "FR",
+      "address": "Caen, Normandie, France"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "issam-gharsallah",
+        "url": "https://www.linkedin.com/in/issam-gharsallah/"
+      },
+      {
+        "network": "GitHub",
+        "username": "issamWebdeveloper",
+        "url": "https://github.com/issamWebdeveloper"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "simpleCV",
+      "company": "IG83",
+      "position": "FullStack Angular 18 / AWS Amplify / GraphQL",
+      "startDate": "2024-09-01",
+      "endDate": "",
+      "summary": "Projet personnel en cours de développement, proposant un service de création de CV en ligne. Mise en place de différents templates, d’un éditeur interactif, et intégration de services back-end (AWS) pour la persistance sécurisée des données. Utilisation de GraphQL pour optimiser les requêtes et d’un export PDF avec des options de personnalisation.",
+      "location": "Caen, Normandie"
+    },
+    {
+      "name": "Lisi Data Lake",
+      "company": "Lisi Aerospace",
+      "position": "Front-End Développeur Angular 17",
+      "startDate": "2023-09-01",
+      "endDate": "2024-03-31",
+      "summary": "Dans un contexte sensible et confidentiel, mise en place d’un système de secours garantissant la continuité des opérations critiques en cas d’attaque ou de ransomware. Participation à la sécurisation des flux, à l’intégration continue, et à la conception front-end en Angular."
+    },
+    {
+      "name": "Vaganet",
+      "company": "Vaganet",
+      "position": "Front-End Développeur Angular 14",
+      "startDate": "2023-02-01",
+      "endDate": "2023-08-31",
+      "highlights": [
+        "Méthodologie Agile SCRUM",
+        "Développement d’interfaces pour la plateforme Vfleet (gestion du parc IT)",
+        "Sécurisation du process d’import/export massif d’utilisateurs (CSV)",
+        "Intégration continue et tests unitaires (Karma, Jasmine)"
+      ],
+      "summary": "Conception d’interfaces front-end, implémentation de mécanismes de sécurité pour les flux de données, et automatisation du déploiement. L’objectif principal : fournir une expérience fiable et sécurisée pour la gestion des équipements informatiques."
+    },
+    {
+      "name": "Scilicet",
+      "company": "Scilicet",
+      "position": "Full-Stack Développeur / DevOps (Ionic 6 / Angular 12 / AWS Amplify)",
+      "startDate": "2022-07-01",
+      "endDate": "2023-01-31",
+      "highlights": [
+        "Pilotage CI/CD sur AWS Amplify (Projet Sansouci)",
+        "Authentification forte via Amazon Cognito (stockage de données sensibles)",
+        "Intégration de Google Maps API 3 pour la recherche de professionnels de santé"
+      ],
+      "summary": "Collaboration sur la solution e-santé Sansouci, avec un accent sur la sécurité et la continuité de service. Mise en place de flux CI/CD robustes, gestion des accès via Cognito et déploiement d’une cartographie pour localiser les praticiens, tout en assurant la conformité RGPD."
+    },
+    {
+      "name": "Epinest",
+      "company": "Epinest",
+      "position": "Front-End Développeur Angular 11/12",
+      "startDate": "2021-10-15",
+      "endDate": "2023-01-31",
+      "highlights": [
+        "Respect des normes RGAA (accessibilité)",
+        "Conformité FHIR pour l’interopérabilité e-santé"
+      ],
+      "summary": "Au sein de la plateforme e-santé Perspicare, mise en œuvre des règles FHIR et RGAA pour garantir l’accessibilité et l’interopérabilité des données de santé. En étroite collaboration avec une équipe Back-End JAVA, j’ai assuré l’intégration front Angular et participé aux démonstrations client."
+    },
+    {
+      "name": "GRDF",
+      "company": "GRDF",
+      "position": "Front-End Développeur (Ionic 4 / Angular 8)",
+      "startDate": "2019-09-02",
+      "endDate": "2020-03-31",
+      "summary": "Au sein de l'équipe CARMA, modernisation d’une application mobile (Ionic 4/Angular 8) pour le diagnostic et la collecte d'informations sur les régulateurs de gaz. Implémentation de bonnes pratiques DevOps (sécurité, tests, déploiements) pour renforcer la fiabilité de la solution."
+    },
+    {
+      "name": "WiDigital Group",
+      "company": "WiDigital Group",
+      "position": "Front-End Développeur Angular 8/9",
+      "startDate": "2019-06-17",
+      "endDate": "2020-11-30",
+      "summary": "Développement de l’application Servicima, centrée sur la gestion des missions et compétences des techniciens. Migration maîtrisée vers Angular 9, pratiques Scrum pour une livraison continue et alignée sur les besoins métiers."
+    },
+    {
+      "name": "SiFast",
+      "company": "SiFast",
+      "position": "Full-Stack Développeur (Angular/PHP/MySQL)",
+      "startDate": "2017-11-01",
+      "endDate": "2019-06-14",
+      "highlights": [
+        "CI/CD avec Jenkins (tests unitaires, fonctionnels, intégration continue)",
+        "Documentations API REST (OpenAPI 3.0)",
+        "Approche TDD avec Jasmine/Karma"
+      ],
+      "summary": "Pilotage de divers projets full-stack (sécurité, expérience client temps réel), intégration continue, et rédaction de documentations API. Utilisation d’Angular, Docker et Jenkins pour garantir fiabilité et déploiements fréquents."
+    },
+    {
+      "name": "Ominet",
+      "company": "Ominet",
+      "position": "Full-Stack Développeur (WordPress / HTML / CSS / JS)",
+      "startDate": "2016-10-03",
+      "endDate": "2017-10-31",
+      "summary": "Développement WordPress porté sur l’accessibilité et le responsive design. Mise en place de flux de travail automatisés (npm, Gulp) pour faciliter l’intégration continue et garantir une haute qualité des livrables."
+    },
+    {
+      "name": "AndyDesign",
+      "company": "AndyDesign",
+      "position": "Full-Stack Développeur (HTML/CSS/JS/PHP/MySQL/AngularJS)",
+      "startDate": "2012-08-01",
+      "endDate": "2016-09-30",
+      "summary": "Réalisation de projets divers (sites vitrines, systèmes de gestion de rendez-vous) impliquant AngularJS, YiiFramework et développement PWA. Gestion de bases de données MySQL et optimisation d’applications pour de fortes charges."
+    },
+    {
+      "name": "Gioca Software",
+      "company": "Gioca Software",
+      "position": "Team Lead (5 Dev)",
+      "startDate": "2010-05-03",
+      "endDate": "2012-06-29",
+      "summary": "Encadrement d’une équipe de cinq développeurs sur des applications web et mobiles (Android, iOS). Coordination technique, gestion de projets et conception de plateformes AngularJS/PHP à haute disponibilité."
+    },
+    {
+      "name": "Myiweb",
+      "company": "Myiweb",
+      "position": "Front-End Développeur Angular",
+      "startDate": "2009-10-01",
+      "endDate": "2010-03-30",
+      "summary": "Refonte front-end d’une importante plateforme de chat en ligne, transition vers Angular et jQuery pour améliorer l’expérience utilisateur et la stabilité globale de l’infrastructure."
+    },
+    {
+      "name": "Media Center",
+      "company": "Media Center",
+      "position": "Full-Stack Développeur (HTML / CSS / JS / PHP / MySQL)",
+      "url": "https://mc-dev.net/",
+      "startDate": "2008-08-01",
+      "endDate": "2009-09-30",
+      "summary": "Contribution à divers projets événementiels et e-commerce. Mise en place de bases de données, d'interfaces administrateur personnalisées et gestion des performances sur PHP/MySQL."
+    },
+    {
+      "name": "PermaFlex",
+      "company": "PermaFlex",
+      "position": "Full-Stack Développeur (HTML / CSS / JS / PHP / MySQL)",
+      "url": "https://permaflex.tn/",
+      "startDate": "2007-08-01",
+      "endDate": "2008-07-31",
+      "summary": "Développement d’un site e-commerce robuste, intégration d’une solution de paiement et mise en œuvre de fonctionnalités avancées de commande/livraison."
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Sauvegarde 93 de la Seine-Saint-Denis",
+      "company": "Sauvegarde 93 de la Seine-Saint-Denis",
+      "position": "Full-Stack Developer (Angular 11, NodeJS, MongoDB)",
+      "url": "https://sauvegarde93.fr/",
+      "startDate": "2020-12-01",
+      "endDate": "2021-06-30",
+      "summary": "Projet bénévole pour accompagner des mineurs en situation irrégulière : mise en place d’un portail Angular/NodeJS avec gestion des profils, objectifs personnalisés, stockage sécurisé des documents et rôles administrateurs/éducateurs.",
+      "highlights": [
+        "Création et mise à jour des profils enfants avec leurs informations",
+        "Assignation aux éducateurs et définition d’objectifs personnalisés",
+        "Stockage sécurisé des documents, suivi des actions chronologiques",
+        "Accès différencié pour les administrateurs et les éducateurs"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Institut Supérieur d’Informatique et de Technique de Communication à Hammem-Sousse",
+      "area": "Informatique Réseaux",
+      "studyType": "DUT, Diplôme Universitaire en Technologie d’informatiques réseaux",
+      "startDate": "2003-12-31",
+      "endDate": "2007-12-31",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "lycée Hedi Checker Sfax tunisie",
+      "area": "Technique",
+      "studyType": "Baccalauréat",
+      "startDate": "",
+      "endDate": "2003-07-20",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "certificates": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Normes de santé",
+      "level": "avancé",
+      "keywords": [
+        "FHIR",
+        "RGPD",
+        "Interopérabilité"
+      ]
+    },
+    {
+      "name": "IA & développement assisté",
+      "level": "avancé",
+      "keywords": [
+        "Claude Code",
+        "GitHub Spec-Kit",
+        "Agents IA",
+        "Spec-driven development",
+        "Prompt engineering",
+        "Intégration d'API LLM"
+      ]
+    },
+    {
+      "name": "Développement d'API",
+      "level": "avancé",
+      "keywords": [
+        "Swagger/OpenAPI 3.0",
+        "REST",
+        "GraphQL",
+        "Authentification sécurisée"
+      ]
+    },
+    {
+      "name": "Front-End",
+      "level": "avancé",
+      "keywords": [
+        "Angular (jusqu'à v20+)",
+        "Signals",
+        "SSR / Hydratation",
+        "TypeScript",
+        "RxJS",
+        "HTML5",
+        "CSS3 / SASS",
+        "Ionic"
+      ]
+    },
+    {
+      "name": "Back-End",
+      "level": "intermédiaire",
+      "keywords": [
+        "Node.js",
+        "NestJS",
+        "Rust (Axum)",
+        "PHP",
+        "PostgreSQL",
+        "MySQL"
+      ]
+    },
+    {
+      "name": "DevOps",
+      "level": "intermédiaire",
+      "keywords": [
+        "Docker",
+        "Devcontainers",
+        "GitLab CI/CD",
+        "Jenkins",
+        "AWS Amplify",
+        "AWS Cognito"
+      ]
+    },
+    {
+      "name": "Méthodologies",
+      "level": "avancé",
+      "keywords": [
+        "Agile/Scrum",
+        "TDD"
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "Sport",
+      "keywords": [
+        "Plongée sous-marine",
+        "Natation"
+      ]
+    },
+    {
+      "name": "Technologies émergentes",
+      "keywords": [
+        "Exploration spatial"
+      ]
+    }
+  ],
+  "references": [],
+  "projects": [
+    {
+      "name": "GoodPlace",
+      "description": "Ce site : vitrine et blog en Rust/Axum, Angular SSR, PostgreSQL et cache mémoire, avec publication programmée par cron et authentification sans mot de passe.",
+      "startDate": "2025-11-16",
+      "url": "https://github.com/issamWebdeveloper/goodplace",
+      "keywords": [
+        "Rust",
+        "Axum",
+        "Angular SSR",
+        "PostgreSQL"
+      ],
+      "article": "goodplace-rust-axum-angular-ssr"
+    },
+    {
+      "name": "devkit",
+      "description": "CLI interactif qui génère des devcontainers sécurisés (pare-feu sortant) avec mappage des ports et intégration de GitHub Spec-Kit pour 20 assistants IA.",
+      "startDate": "2026-02-24",
+      "url": "https://github.com/issamWebdeveloper/devkit",
+      "keywords": [
+        "Node.js",
+        "Docker",
+        "IA",
+        "Spec-Kit"
+      ],
+      "article": "devkit-devcontainers-ia"
+    },
+    {
+      "name": "simpleCV",
+      "description": "Service de création de CV en ligne : éditeur interactif, templates, export PDF, back-end AWS Amplify et GraphQL.",
+      "startDate": "2024-09-01",
+      "url": "https://github.com/issamWebdeveloper/amplify-angular",
+      "keywords": [
+        "Angular 18",
+        "AWS Amplify",
+        "GraphQL"
+      ],
+      "article": "angular-amplify-graphql-simplecv"
+    },
+    {
+      "name": "ANSAAB",
+      "description": "Plateforme généalogique basée sur la spécification GEDCOM X : arbres interactifs, collaboration, cartes de migrations.",
+      "startDate": "2024-11-25",
+      "url": "https://github.com/issamWebdeveloper/ansaab",
+      "keywords": [
+        "GEDCOM X",
+        "Angular",
+        "Visualisation"
+      ],
+      "article": "ansaab-genealogie-gedcomx"
+    },
+    {
+      "name": "Leitner-Learning",
+      "description": "Application de mémorisation par flashcards selon la méthode Leitner, Angular + AWS (Cognito, Lambda, DynamoDB).",
+      "startDate": "2024-10-25",
+      "url": "https://github.com/issamWebdeveloper/Leitner-learning",
+      "keywords": [
+        "Angular",
+        "AWS Lambda",
+        "DynamoDB"
+      ],
+      "article": "leitner-learning-angular-aws"
+    }
+  ],
+  "meta": {
+    "version": "v1.0.0",
+    "canonical": "https://github.com/jsonresume/resume-schema/blob/v1.0.0/schema.json"
+  }
+}

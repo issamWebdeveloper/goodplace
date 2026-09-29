@@ -1,0 +1,204 @@
+@let b = basics();
+
+<!-- Hero -->
+<section class="hero section-primary">
+  <div class="hero-shapes" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="text-meta">{{ b.location.address }}</span>
+      <h1 class="heading-display">Développeur web<br /><strong>&amp; IA</strong></h1>
+      <p class="hero-lead">
+        Je suis {{ b.name }}. Je conçois des applications Angular rapides, accessibles et
+        sécurisées, et j'intègre l'intelligence artificielle au cœur du développement.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-light" routerLink="/blog">Lire le blog</a>
+        <a class="btn btn-ghost" routerLink="/" fragment="contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img [src]="b.image" [alt]="'Portrait de ' + b.name" width="379" height="379" fetchpriority="high" />
+    </div>
+  </div>
+</section>
+
+<!-- Chiffres clés -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div>
+      <strong class="text-gradient">{{ experienceYears() }}+</strong>
+      <span>années d'expérience web</span>
+    </div>
+    <div>
+      <strong class="text-gradient">{{ profile().work.length }}</strong>
+      <span>missions et entreprises</span>
+    </div>
+    <div>
+      <strong class="text-gradient">{{ projects().length }}</strong>
+      <span>projets récents open source</span>
+    </div>
+    <div>
+      <strong class="text-gradient">e-Santé</strong>
+      <span>FHIR, RGPD, RGAA</span>
+    </div>
+  </div>
+</section>
+
+<!-- À propos -->
+<section class="section" id="a-propos">
+  <div class="container about">
+    <div>
+      <span class="text-meta">À propos</span>
+      <h2 class="heading-section">Bonjour, moi c'est {{ firstName() }}</h2>
+    </div>
+    <div>
+      <p class="lead">{{ b.summary }}</p>
+      <p>
+        Aujourd'hui, je combine cette expertise front-end avec des outils d'IA générative
+        (agents de développement, spec-driven development) pour livrer plus vite, sans sacrifier la
+        qualité ni la sécurité.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Compétences -->
+<section class="section section-muted" id="competences">
+  <div class="container">
+    <header class="section-header">
+      <span class="text-meta">Compétences</span>
+      <h2 class="heading-section">Ce que je sais faire</h2>
+      <p class="lead">Du pixel à l'API, avec une attention particulière à la sécurité, à la performance et à l'accessibilité.</p>
+    </header>
+    <div class="skills-grid">
+      @for (skill of skills(); track skill.name) {
+        <article class="card card-hover skill" [class.skill-ai]="skill.name.includes('IA')">
+          <div class="card-body">
+            <span class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path [attr.d]="skillIcon(skill.name)" />
+              </svg>
+            </span>
+            <h3>{{ skill.name }}</h3>
+            <p class="skill-level">Niveau {{ skill.level }}</p>
+            <ul>
+              @for (k of skill.keywords; track k) {
+                <li class="tag">{{ k }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Parcours -->
+<section class="section" id="parcours">
+  <div class="container container-narrow">
+    <header class="section-header">
+      <span class="text-meta">Parcours</span>
+      <h2 class="heading-section">Expériences</h2>
+    </header>
+    <ol class="timeline">
+      @for (job of work(); track job.name + job.startDate) {
+        <li>
+          <span class="period">{{ period(job) }}</span>
+          <h3>{{ job.position }}</h3>
+          <p class="company">{{ job.company || job.name }}</p>
+          <p>{{ job.summary }}</p>
+          @if (job.highlights?.length) {
+            <ul class="highlights">
+              @for (h of job.highlights; track h) {
+                <li>{{ h }}</li>
+              }
+            </ul>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Projets -->
+<section class="section section-dark" id="projets">
+  <div class="container">
+    <header class="section-header">
+      <span class="text-meta">Projets</span>
+      <h2 class="heading-section">Réalisations récentes</h2>
+      <p class="muted-inverse">Projets personnels publiés sur GitHub depuis 2024, chacun raconté dans un article du blog.</p>
+    </header>
+    <div class="projects-grid">
+      @for (p of projects(); track p.name) {
+        <article class="project">
+          <span class="project-date">{{ p.startDate | date: 'MMMM y' }}</span>
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.description }}</p>
+          <ul class="project-tags">
+            @for (k of p.keywords; track k) {
+              <li>{{ k }}</li>
+            }
+          </ul>
+          <div class="project-links">
+            @if (p.article) {
+              <a [routerLink]="['/blog', p.article]">Lire l'article →</a>
+            }
+            <a [href]="p.url" target="_blank" rel="noopener">Code source</a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Derniers articles -->
+@if (latest().length) {
+  <section class="section">
+    <div class="container">
+      <header class="section-header">
+        <span class="text-meta">Blog</span>
+        <h2 class="heading-section">Derniers articles</h2>
+      </header>
+      <div class="articles-grid">
+        @for (a of latest(); track a.slug) {
+          <app-article-card [article]="a" />
+        }
+      </div>
+      <p class="center">
+        <a class="btn btn-default" routerLink="/blog">Tous les articles</a>
+      </p>
+    </div>
+  </section>
+}
+
+<!-- Newsletter -->
+<section class="section section-primary newsletter">
+  <div class="container container-narrow center">
+    <span class="text-meta">Newsletter</span>
+    <h2 class="heading-section">Ne manquez aucun article</h2>
+    <p>Un email à chaque nouvelle publication, rien de plus. Accédez ensuite à votre espace abonné par simple lien, sans mot de passe.</p>
+    <app-newsletter-form [inverse]="true" />
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section section-muted" id="contact">
+  <div class="container container-narrow center">
+    <span class="text-meta">Contact</span>
+    <h2 class="heading-section">Travaillons ensemble</h2>
+    <p class="lead">Une mission Angular, un projet full-stack ou l'intégration de l'IA dans votre équipe ? Écrivez-moi.</p>
+    <p class="contact-email">
+      <a [href]="'mailto:' + b.email">{{ b.email }}</a>
+    </p>
+    <div class="contact-links">
+      @if (linkedin(); as li) {
+        <a class="btn btn-primary" [href]="li.url" target="_blank" rel="noopener">LinkedIn</a>
+      }
+      @if (github(); as gh) {
+        <a class="btn btn-default" [href]="gh.url" target="_blank" rel="noopener">GitHub</a>
+      }
+    </div>
+  </div>
+</section>

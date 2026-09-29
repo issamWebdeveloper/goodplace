@@ -1,0 +1,8 @@
+goodplace.ovh {
+	encode zstd gzip
+	reverse_proxy web:4000
+}
+
+www.goodplace.ovh {
+	redir https://goodplace.ovh{uri} permanent
+}

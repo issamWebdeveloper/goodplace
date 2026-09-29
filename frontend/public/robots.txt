@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /compte
+Disallow: /auth/
+
+Sitemap: https://goodplace.ovh/sitemap.xml
