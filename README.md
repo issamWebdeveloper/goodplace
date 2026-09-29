@@ -88,14 +88,19 @@ et `/rss.xml` vers l'API. Navigateur et API partagent donc la même origine (coo
 
 ## Démarrage
 
-### Avec Docker
+### En production (Docker, derrière le Caddy du serveur)
 
 ```bash
-cp .env.example .env        # renseigner POSTGRES_PASSWORD, JWT_SECRET, ADMIN_PASSWORD, SMTP_*
-docker compose up -d --build
+cp .env.example .env        # POSTGRES_PASSWORD, JWT_SECRET, ADMIN_PASSWORD, SMTP_* ...
+docker compose -p goodplace up -d --build
 ```
 
-Caddy obtient automatiquement le certificat HTTPS pour `goodplace.ovh` (voir `Caddyfile`).
+Le front écoute sur `127.0.0.1:4000`. Ajouter le bloc du fichier `Caddyfile` à `/etc/caddy/Caddyfile`,
+puis `sudo systemctl reload caddy` (HTTPS automatique).
+
+Mise à jour : `git pull && docker compose -p goodplace up -d --build`.
+Logs : `docker compose -p goodplace logs -f api`.
+
 En local, `docker compose --profile dev up` ajoute [Mailpit](http://localhost:8025) pour lire les emails.
 
 ### En développement
