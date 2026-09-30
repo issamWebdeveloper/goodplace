@@ -36,7 +36,7 @@
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: minmax(0, 760px);
   align-items: center;
   gap: 48px;
 }
@@ -58,27 +58,6 @@
   gap: 14px;
 }
 
-.hero-photo {
-  justify-self: center;
-  position: relative;
-  width: min(360px, 80vw);
-  aspect-ratio: 1;
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -14px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-  }
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 6px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-  }
-}
 
 /* ---------- Chiffres ---------- */
 .stats {
@@ -339,10 +318,6 @@
   .hero-grid,
   .about {
     grid-template-columns: 1fr;
-  }
-  .hero-photo {
-    order: -1;
-    width: min(220px, 60vw);
   }
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);

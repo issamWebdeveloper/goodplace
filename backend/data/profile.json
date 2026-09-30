@@ -3,7 +3,6 @@
   "basics": {
     "name": "Issam GHARSALLAH",
     "label": "Développeur Front-End Angular & Full-Stack • IA appliquée au développement",
-    "image": "/images/issam-gharsallah.jpg",
     "email": "issam.webdeveloper@gmail.com",
     "url": "https://gharsallah.link",
     "summary": "Fort de 17 années d’expérience en développement web, dont plusieurs dans l’e-santé et la manipulation de données sensibles, j’ai démontré ma capacité à concevoir et à déployer des solutions fiables et sûres (RGPD, FHIR, standards HDS). J’adhère aux méthodologies TDD et DevOps (GitLab CI/CD, Docker) et maîtrise JavaScript/TypeScript, Angular (jusqu’à la v18) ainsi que les principes de sécurité (OAuth, chiffrement, authentification forte). Je reste en veille sur les technologies émergentes et je suis motivé par la mise en place de projets critiques requérant un haut niveau de conformité.",

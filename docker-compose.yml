@@ -1,5 +1,7 @@
 # Déploiement : PostgreSQL + API Rust + front Angular SSR.
-# Le front écoute sur 127.0.0.1:4000, derrière le Caddy du serveur (voir Caddyfile).
+# Le front écoute sur 127.0.0.1:${WEB_PORT} (4000 par défaut), derrière le Caddy du serveur (voir Caddyfile).
+# Un environnement = un projet compose + un fichier d'environnement (voir deploy/deploy.sh) :
+#   prod → goodplace (4000) · preprod → goodplace-preprod (4001) · test → goodplace-test (4002)
 # Développement local avec capture des emails : docker compose --profile dev up
 services:
   db:
@@ -19,7 +21,7 @@ services:
   api:
     build: ./backend
     restart: unless-stopped
-    env_file: .env
+    env_file: ${GOODPLACE_ENV_FILE:-.env}
     environment:
       DATABASE_URL: postgres://goodplace:${POSTGRES_PASSWORD}@db:5432/goodplace
       BIND_ADDR: 0.0.0.0:8080
@@ -34,7 +36,7 @@ services:
       API_URL: http://api:8080
       PORT: 4000
     ports:
-      - "127.0.0.1:4000:4000"
+      - "127.0.0.1:${WEB_PORT:-4000}:4000"
     depends_on:
       - api
 
