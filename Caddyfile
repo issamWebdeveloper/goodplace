@@ -1,4 +1,4 @@
-# Bloc à ajouter au Caddyfile du serveur (/etc/caddy/Caddyfile), puis : sudo systemctl reload caddy
+# Blocs à ajouter au Caddyfile du serveur (/etc/caddy/Caddyfile), puis : sudo systemctl reload caddy
 goodplace.ovh {
 	encode zstd gzip
 	header {
@@ -11,4 +11,27 @@ goodplace.ovh {
 
 www.goodplace.ovh {
 	redir https://goodplace.ovh{uri} permanent
+}
+
+# Préproduction et test : non indexés par les moteurs de recherche
+preprod.goodplace.ovh {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Robots-Tag "noindex, nofollow"
+	}
+	reverse_proxy 127.0.0.1:4001
+}
+
+test.goodplace.ovh {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Robots-Tag "noindex, nofollow"
+	}
+	reverse_proxy 127.0.0.1:4002
 }

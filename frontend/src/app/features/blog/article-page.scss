@@ -138,18 +138,8 @@
 }
 
 .author {
-  display: flex;
-  align-items: center;
-  gap: 20px;
   margin: 56px 0 32px;
   padding: 24px;
-  img {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
   p {
     margin: 4px 0 0;
     color: var(--gp-muted);

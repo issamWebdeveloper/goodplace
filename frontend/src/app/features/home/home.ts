@@ -64,7 +64,6 @@ export class Home {
             name: b.name,
             jobTitle: b.label,
             email: `mailto:${b.email}`,
-            image: this.seo.absolute(b.image),
             url: SITE.url,
             address: { '@type': 'PostalAddress', addressLocality: 'Caen', addressCountry: 'FR' },
             sameAs: b.profiles.map((p) => p.url),

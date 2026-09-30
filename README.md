@@ -88,18 +88,32 @@ et `/rss.xml` vers l'API. Navigateur et API partagent donc la même origine (coo
 
 ## Démarrage
 
-### En production (Docker, derrière le Caddy du serveur)
+### Environnements et déploiement continu
 
-```bash
-cp .env.example .env        # POSTGRES_PASSWORD, JWT_SECRET, ADMIN_PASSWORD, SMTP_* ...
-docker compose -p goodplace up -d --build
-```
+| Branche | URL | Projet compose | Port local |
+| --- | --- | --- | --- |
+| `test` | https://test.goodplace.ovh | `goodplace-test` | 4002 |
+| `preprod` | https://preprod.goodplace.ovh | `goodplace-preprod` | 4001 |
+| `prod` | https://goodplace.ovh | `goodplace` | 4000 |
 
-Le front écoute sur `127.0.0.1:4000`. Ajouter le bloc du fichier `Caddyfile` à `/etc/caddy/Caddyfile`,
-puis `sudo systemctl reload caddy` (HTTPS automatique).
+Les nouveautés arrivent sur `test`, puis sont fusionnées dans `preprod`, puis dans `prod`.
+Chaque push sur l'une de ces branches déclenche le workflow `.github/workflows/deploy.yml`, exécuté par un
+runner GitHub auto-hébergé sur le serveur (étiquette `goodplace`) : construction des images, redémarrage
+de l'environnement (`deploy/deploy.sh <env>`) et vérification de `/api/health`.
+Chaque environnement a sa propre base de données et son fichier d'environnement, hors du dépôt :
+`~/goodplace-env/{prod,preprod,test}.env` (même format que `.env.example`).
 
-Mise à jour : `git pull && docker compose -p goodplace up -d --build`.
-Logs : `docker compose -p goodplace logs -f api`.
+**Versions** : chaque mise en prod réussie est taguée `vX.Y.Z` avec une release GitHub. Le numéro est
+calculé à partir des messages de commit depuis la dernière version (`deploy/next-version.sh`) :
+
+| Message de commit | Version |
+| --- | --- |
+| `feat!: …`, `BREAKING CHANGE` ou `[major]` | majeure (`1.0.0`) |
+| `feat: …` / `feat(blog): …` ou `[minor]` | mineure (`0.6.0`) |
+| tout le reste (`fix:`, `style:`, `docs:`…) | corrective (`0.5.3`) |
+
+Déploiement manuel : `deploy/deploy.sh prod`. Logs : `docker compose -p goodplace logs -f api`.
+Les blocs Caddy des trois domaines sont dans `Caddyfile`.
 
 En local, `docker compose --profile dev up` ajoute [Mailpit](http://localhost:8025) pour lire les emails.
 
